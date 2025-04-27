@@ -6,6 +6,9 @@ const session = require("express-session");
 const passport = require("passport");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("@prisma/client");
+// Routers
+const indexRouter = require("./routes/indexRoute");
+const authRouter = require("./routes/authRoute");
 
 // setup
 app.set("views", path.join(__dirname, "views"));
@@ -32,9 +35,9 @@ app.use(session({
 app.use(passport.session());
 app.use(express.urlencoded( {extended: false }));
 
-app.get("/", (req, res) => {
-    res.send("Hello");
-})
+// routes
+app.use(indexRouter);
+app.use(authRouter);
 
 // port
 app.listen(3000, () => {
