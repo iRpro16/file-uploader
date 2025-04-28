@@ -9,6 +9,7 @@ const { PrismaClient } = require("@prisma/client");
 // Routers
 const indexRouter = require("./routes/indexRoute");
 const authRouter = require("./routes/authRoute");
+require("./config/passport")(passport);
 
 // setup
 app.set("views", path.join(__dirname, "views"));
