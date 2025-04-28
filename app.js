@@ -9,6 +9,7 @@ const { PrismaClient } = require("@prisma/client");
 // Routers
 const indexRouter = require("./routes/indexRoute");
 const authRouter = require("./routes/authRoute");
+const fileRouter = require("./routes/fileRoute");
 require("./config/passport")(passport);
 
 // setup
@@ -39,6 +40,7 @@ app.use(express.urlencoded( {extended: false }));
 // routes
 app.use(indexRouter);
 app.use(authRouter);
+app.use(fileRouter);
 
 // port
 app.listen(3000, () => {

@@ -5,7 +5,15 @@
     </head>
     <body>
         <% if (locals.user) { %>
-            <h1>Hello world</h1>
+            <h1>Hello <%= user.username %></h1>
+            <% if (locals.files) { %>
+                <ul class="files-list">
+                    <% files.forEach(function(file) { %>
+                      <li><a href="<%= file.path %>"><%= file.filename %></a></li>
+                    <% }); %>
+                  </ul>
+            <% } %>
+            <a href="logout">Log out</a>
         <% } else { %>
             <%- include('login') %>
         <% } %>
