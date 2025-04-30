@@ -1,10 +1,11 @@
 const prisma = require("../prisma/client");
 
-async function createFile(filename, path, folderId = null, userId) {
+async function createFile(filename, path, size, folderId = null, userId) {
     await prisma.file.create({
         data: {
             filename: filename,
             path: path,
+            size: size,
             folderId: folderId,
             userId: userId,
         }
@@ -30,8 +31,18 @@ async function showFolderFiles(userId, folderID) {
     return allFiles;
 }
 
+async function showFile(fileId) {
+    const file = await prisma.file.findUnique({
+        where: {
+            id: fileId
+        }
+    })
+    return file;
+}
+
 module.exports = {
     createFile,
     showFiles,
-    showFolderFiles
+    showFolderFiles,
+    showFile
 }

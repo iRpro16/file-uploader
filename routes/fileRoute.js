@@ -17,6 +17,8 @@ fileRouter.post("/folder/:folderId/upload-file",
     fileController.postUploadFileInFolder
 );
 
+// GET method for show file
+fileRouter.get("/file/:fileId", fileController.getShowFile);
 
 // GET method to show all files in folder
 fileRouter.get("/folder/:folderId", fileController.getShowFolderFiles);

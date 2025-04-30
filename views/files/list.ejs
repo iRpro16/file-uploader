@@ -7,7 +7,7 @@
         <% if (locals.allFiles) { %>
             <ul>
                 <% allFiles.forEach(function(file) { %>
-                  <li><a href="<%= file.path %>"><%= file.filename %></a></li>
+                  <li><a href="<%= `/file/${file.id}` %>"><%= file.filename %></a></li>
                 <% }); %>
             </ul>
         <% } %>

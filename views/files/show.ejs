@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>File Details</title>
+    </head>
+    <body>
+        <div class="file-details">
+            <h1>File Details</h1>
+            <% if (locals.file) { %>
+                <div class="details-cont">
+                    <p>Name: <%= file.filename %></p>
+                    <p>Size: <%= file.size %></p>
+                </div>
+            <% } %>
+        </div>
+    </body>
+</html>
