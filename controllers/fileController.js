@@ -1,19 +1,34 @@
 const fileService = require("../services/fileService");
 
 async function getUploadFile(req, res) {
+    res.render("file", { 
+        folderId: null
+    });
+}
+
+async function postUploadFile(req, res) {
+    await fileService.createFile(
+        req.file.originalname,
+        req.file.path,
+        req.user.id,
+    )
+    res.redirect("/");
+}
+
+async function getUploadFileInFolder(req, res) {
     const folderId = req.params.folderId;
     res.render("file", { folderId });
 }
 
-async function postUploadfile(req, res) {
-    const folderId  = req.params.folderId;
+async function postUploadFileInFolder(req, res) {
+    const folderId = Number(req.params.folderId);
     await fileService.createFile(
         req.file.originalname,
         req.file.path,
-        Number(folderId),
-        req.user.id,
+        folderId,
+        req.user.id
     )
-    res.redirect("/");
+    res.redirect(`/folder/${folderId}`);
 }
 
 async function getShowFolderFiles(req, res) {
@@ -22,6 +37,7 @@ async function getShowFolderFiles(req, res) {
         Number(req.params.folderId)
     )
     res.render("showFiles", {
+        folderId: req.params.folderId,
         allFiles: allFolderFiles
     })
 }
@@ -29,6 +45,8 @@ async function getShowFolderFiles(req, res) {
 
 module.exports = {
     getUploadFile,
-    postUploadfile,
-    getShowFolderFiles
+    postUploadFile,
+    getShowFolderFiles,
+    postUploadFileInFolder,
+    getUploadFileInFolder
 }

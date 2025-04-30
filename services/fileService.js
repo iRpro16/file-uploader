@@ -1,11 +1,11 @@
 const prisma = require("../prisma/client");
 
-async function createFile(filename, path, folderId, userId) {
+async function createFile(filename, path, folderId = null, userId) {
     await prisma.file.create({
         data: {
             filename: filename,
             path: path,
-            folderId: folderId || null,
+            folderId: folderId,
             userId: userId,
         }
     })

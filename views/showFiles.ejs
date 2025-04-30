@@ -3,6 +3,7 @@
         <title>Folder Files</title>
     </head>
     <body>
+        <a href="<%= `/folder/${folderId}/upload-file`%>">Add to folder</a>
         <% if (locals.allFiles) { %>
             <ul>
                 <% allFiles.forEach(function(file) { %>
@@ -13,5 +14,6 @@
         <% if (locals.allFiles.length === 0) { %>
             <h1>No files yet</h1>
         <% }%>
+        <a href="/">Back to home</a>
     </body>
 </html>
