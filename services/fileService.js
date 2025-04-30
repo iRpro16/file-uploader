@@ -20,7 +20,18 @@ async function showFiles(userId) {
     return allFiles;
 }
 
+async function showFolderFiles(userId, folderID) {
+    const allFiles = await prisma.file.findMany({
+        where: {
+            userId: userId,
+            folderId: folderID
+        }
+    })
+    return allFiles;
+}
+
 module.exports = {
     createFile,
-    showFiles
+    showFiles,
+    showFolderFiles
 }

@@ -11,7 +11,14 @@
                     <% files.forEach(function(file) { %>
                       <li><a href="<%= file.path %>"><%= file.filename %></a></li>
                     <% }); %>
-                  </ul>
+                </ul>
+            <% } %>
+            <% if (locals.folders) { %>
+                <ul class="folders-list">
+                    <% folders.forEach(function(folder) { %>
+                      <li><a href="/folder/<%= folder.id %>"><%= folder.title %></a></li>
+                    <% }); %>
+                </ul>
             <% } %>
             <a href="logout">Log out</a>
         <% } else { %>

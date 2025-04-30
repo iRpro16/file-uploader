@@ -10,6 +10,7 @@ const { PrismaClient } = require("@prisma/client");
 const indexRouter = require("./routes/indexRoute");
 const authRouter = require("./routes/authRoute");
 const fileRouter = require("./routes/fileRoute");
+const folderRouter = require("./routes/folderRoute");
 require("./config/passport")(passport);
 
 // setup
@@ -41,7 +42,7 @@ app.use(express.urlencoded( {extended: false }));
 app.use(indexRouter);
 app.use(authRouter);
 app.use(fileRouter);
-
+app.use(folderRouter);
 // port
 app.listen(3000, () => {
     console.log("Listening to on PORT: 3000");

@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Folder Files</title>
+    </head>
+    <body>
+        <% if (locals.allFiles) { %>
+            <ul>
+                <% allFiles.forEach(function(file) { %>
+                  <li><a href="<%= file.path %>"><%= file.filename %></a></li>
+                <% }); %>
+            </ul>
+        <% } %>
+        <% if (locals.allFiles.length === 0) { %>
+            <h1>No files yet</h1>
+        <% }%>
+    </body>
+</html>
