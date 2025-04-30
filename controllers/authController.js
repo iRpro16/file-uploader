@@ -4,7 +4,7 @@ const authService = require("../services/authService");
 const passport = require('passport');
 
 async function getLogIn(req, res) {
-    res.render("login");
+    res.render("auth/login");
 }
 
 async function postLogIn(req, res, next) {
@@ -24,13 +24,13 @@ async function getLogOut(req, res, next) {
 }
 
 async function getSignUp(req, res) {
-    res.render("signup");
+    res.render("auth/signup");
 }
 
 async function postSignUp(req, res, next) {
     const errors =validationResult(req);
     if(!errors.isEmpty()) {
-        return res.status(400).render("signup", {
+        return res.status(400).render("auth/signup", {
             errors: errors.array(),
         });
     }

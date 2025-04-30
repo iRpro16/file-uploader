@@ -1,7 +1,7 @@
 const folderService = require("../services/folderService");
 
 async function getCreateFolder(req, res) {
-    res.render("folder");
+    res.render("forms/folder");
 }
 
 async function postCreateFolder(req, res) {
