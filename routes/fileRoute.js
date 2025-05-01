@@ -2,7 +2,8 @@ const { Router } = require("express");
 const fileRouter = Router();
 const fileController = require("../controllers/fileController");
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage });
 
 // GET method for upload file
 fileRouter.get("/upload-file", fileController.getUploadFile);

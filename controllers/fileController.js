@@ -15,14 +15,22 @@ async function getUploadFile(req, res) {
 }
 
 async function postUploadFile(req, res) {
-    const size = req.file.size;
-    await fileService.createFile(
-        req.file.originalname,
-        req.file.path,
-        size.toString(),
-        req.user.id,
-    )
-    res.redirect("/");
+    try {
+        const file = req.file; 
+        const publicUrl = await fileService.uploadToSupabase(file);
+
+        await fileService.createFile(
+            file.originalname,
+            publicUrl,
+            file.size.toString(),
+            req.user.id,
+        )
+
+        res.redirect("/");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Upload failed");
+    }
 }
 
 async function getUploadFileInFolder(req, res) {
@@ -31,16 +39,25 @@ async function getUploadFileInFolder(req, res) {
 }
 
 async function postUploadFileInFolder(req, res) {
-    const folderId = Number(req.params.folderId);
-    const size = req.file.size;
-    await fileService.createFile(
-        req.file.originalname,
-        req.file.path,
-        size.toString(),
-        folderId,
-        req.user.id
-    )
-    res.redirect(`/folder/${folderId}`);
+    try {
+        const file = req.file;
+        const folderId = Number(req.params.folderId);
+        const publicUrl = await fileService.uploadToSupabase(file);
+
+        await fileService.createFile(
+            file.originalname,
+            publicUrl,
+            file.size.toString(),
+            req.user.id,
+            folderId
+        )
+
+        res.redirect(`/folder/${folderId}`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Upload failed");
+    }
+    
 }
 
 async function getShowFolderFiles(req, res) {
