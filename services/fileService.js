@@ -57,10 +57,42 @@ async function uploadToSupabase(file) {
         return urlData.publicUrl;
 }
 
+async function deleteFilesFromFolder(folderId) {
+    await prisma.file.deleteMany({
+        where: {
+            folderId: folderId
+        }
+    })
+}
+
+async function deleteFromSupabase(deletedFiles) {
+    const fileURLs = deletedFiles.map(file => file.filename);
+    const { data, error } = await supabase.storage
+        .from('images')
+        .remove(fileURLs);
+}
+
+async function deleteFileFromSupabase(fileArray) {
+    const fileURLs = fileArray.map(file => file.filename);
+    const { data, erro } = await supabase.storage
+        .from('images')
+        .remove(fileURLs);
+}
+
+async function deleteFile(fileId) {
+    await prisma.file.delete({
+        where: { id: fileId }
+    })
+}
+
 module.exports = {
     createFile,
     showFiles,
     showFolderFiles,
     showFile,
     uploadToSupabase,
+    deleteFilesFromFolder,
+    deleteFromSupabase,
+    deleteFileFromSupabase,
+    deleteFile
 }

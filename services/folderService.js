@@ -16,7 +16,16 @@ async function showFolders(userId) {
     return allFolders;
 }
 
+async function deleteFolder(folderId) {
+    await prisma.folder.delete({
+        where: {
+            id: folderId,
+        }
+    })
+}
+
 module.exports = {
     createFolder,
-    showFolders
+    showFolders,
+    deleteFolder
 }

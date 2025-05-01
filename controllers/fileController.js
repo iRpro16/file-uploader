@@ -71,11 +71,28 @@ async function getShowFolderFiles(req, res) {
     })
 }
 
+async function getDeleteFile(req, res) {
+    try {
+        const fileId = Number(req.params.fileId);
+        const file = await fileService.showFile(fileId);
+
+        // delete from prisma and supabase
+        await fileService.deleteFile(fileId);
+        await fileService.deleteFileFromSupabase([file]);
+
+        res.redirect("/");
+    } catch (err) {
+        console.error("Error deleting file:", err);
+        res.status(500).send("Failed to delete folder");
+    }
+}
+
 module.exports = {
     getUploadFile,
     postUploadFile,
     getShowFolderFiles,
     postUploadFileInFolder,
     getUploadFileInFolder,
-    getShowFile
+    getShowFile,
+    getDeleteFile
 }
