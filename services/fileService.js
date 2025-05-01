@@ -1,6 +1,5 @@
 const prisma = require("../prisma/client");
 const supabase = require('../config/supabase');
-const { decode } = require("base64-arraybuffer");
 
 async function createFile(filename, path, size, userId, folderId = null) {
     await prisma.file.create({
@@ -63,5 +62,5 @@ module.exports = {
     showFiles,
     showFolderFiles,
     showFile,
-    uploadToSupabase
+    uploadToSupabase,
 }
