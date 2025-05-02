@@ -7,9 +7,10 @@
     <body>
         <div id="content">
             <% if (locals.user) { %>
-                <h1>Hello <%= user.username %></h1>
-                <%- include("folders/listAll.ejs", {folders: folders, files: files}); %>
-                <a href="logout">Log out</a>
+                <%- include("partials/header.ejs") %>
+                <div id="middle">
+                    <%- include("folders/listAll.ejs", {folders: folders, files: files}); %>
+                </div>
             <% } else { %>
                 <%- include('auth/login') %>
             <% } %>

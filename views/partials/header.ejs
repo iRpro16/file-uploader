@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/css/header.css">
+    </head>
+    <body>
+        <header>
+            <div>
+                <img src="/images/database.svg" height="40" width="40">
+                <h2>EZ Drive</h2>
+            </div>
+
+            <div class="menus">
+                <div class="action">
+                    <div class="trigger" onclick="menuToggle(this);">
+                        <img src="/images/plus.svg" height="20" width="20">
+                        <p>New</p>
+                    </div>
+                    <div class="menu new-dropdown">
+                        <ul>
+                            <li>
+                                <img src="/images/file-document-plus-outline.svg" height="20" width="20"> 
+                                <a href="/upload-file">New file</a>
+                            </li>
+                            <li>
+                                <img src="/images/folder-plus-outline.svg" height="20" width="20">
+                                <a href="/create-folder">New folder</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="action">
+                    <div class="trigger" onclick="menuToggle(this);">
+                        <p><%= user.username %></p>
+                    </div>
+                    <div class="menu profile-dropdown">
+                        <div>
+                            <h3><%= user.email %></h3>
+                            <p>Hello, <%= user.name %></p>
+                        </div>
+                        <div class="logout">
+                            <img src="/images/logout.svg" height="20" width="20">
+                            <a href="logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <script>
+            function menuToggle(trigger) {
+                const allMenus = document.querySelectorAll('.menu');
+                const currentMenu = trigger.nextElementSibling;
+
+                allMenus.forEach(menu => {
+                    if (menu !== currentMenu) {
+                    menu.classList.remove('active');
+                    }
+                });
+
+                currentMenu.classList.toggle('active');  
+            }
+
+            document.addEventListener('click', e => {
+            const clickedInsideDropdown = e.target.closest('.action');
+            if (!clickedInsideDropdown) {
+                document.querySelectorAll('.menu').forEach(menu => menu.classList.remove('active'));
+            }
+          });
+        </script>
+    </body>
+</html>
