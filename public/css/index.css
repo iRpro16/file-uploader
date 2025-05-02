@@ -1,6 +1,8 @@
 body {
     margin: 0px;
     padding: 0px;
+    background-color: #f9f8f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #content {
@@ -15,28 +17,143 @@ body {
     justify-content: center;
     align-items: center;
     min-width: 100vw;
+    margin-top: 20px;
 }
 
-.folder {
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid black;
-}
-
-.file {
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid black;
-}
-
-.folder > div:nth-child(2) {
-    display: flex;
-    gap: 10px;
-}
-
+/* all files */
 .list-all {
     display: flex;
     flex-direction: column;
     padding: 10px;
     width: 1000px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+/* folder */
+.folder {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.folder a {
+    text-decoration: none;
+    color: black;
+}
+
+.folder a:hover {
+    text-decoration: underline;
+}
+
+.folder > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+/* file */
+.file {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.file a {
+    text-decoration: none;
+    color: black;
+}
+
+.file a:hover {
+    text-decoration: underline;
+}
+
+.file > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+/* file */
+.end-file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+}
+
+/* details */
+.details {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.end-folder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+}
+
+.links {
+    display: flex;
+    gap: 12px;
+}
+
+.menu-cont {
+    position: relative;
+    display: inline-block;
+}
+
+.links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+}
+
+.links.active {
+    display: flex;
+}
+
+.menu-cont img {
+    cursor: pointer;
+}
+
+.links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.links a:first-child {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.end-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+}
+
+.folder:hover, .file:hover {
+    background-color: #f3f3f3;
 }

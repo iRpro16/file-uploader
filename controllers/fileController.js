@@ -1,19 +1,5 @@
 const fileService = require("../services/fileService");
 
-async function getShowFile(req, res) {
-    try {
-        const fileId = Number(req.params.fileId);
-        const file  = await fileService.showFile(fileId);
-
-        res.render("files/show", { 
-            file: file
-        });
-    } catch (err) {
-        console.error("Error showing file:", err);
-        res.status(500).send("Show file failed");
-    }
-}
-
 async function getUploadFile(req, res) {
     res.render("forms/file", { 
         folderId: null
