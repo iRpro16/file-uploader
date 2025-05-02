@@ -1,0 +1,37 @@
+<div class="list-all">
+    <div class="folders">
+        <% if (locals.folders) { %>
+            <% folders.forEach(folder => { %>
+                <div class="folder">
+                    <div>
+                        <img src="/images/folder.svg" alt="folder icon" width="20" height="20">
+                        <a href="/folder/<%= folder.id %>"><%= folder.title %></a>
+                    </div>
+                    <div>
+                        <a href="/delete/<%= folder.id %>">
+                            <img src="/images/delete.svg" alt="delete icon" width="20" height="20">
+                        </a>
+                        <a href="/edit/<%= folder.id %>">
+                            <img src="/images/folder-edit.svg" alt="folder edit" width="20" height="20">
+                        </a>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+    <div class="files">
+        <% if (locals.files) { %>
+            <% files.forEach(file => { %>
+                <div class="file">
+                    <div>
+                        <img src="/images/file.svg" alt="file icon" width="20" height="20">
+                        <a href="<%= `/file/${file.id}` %>"><%= file.filename %></a>
+                    </div>
+                    <a href="<%= `/file/${file.id}/delete` %>">
+                        <img src="/images/delete.svg" alt="delete icon" width="20" height="20">
+                    </a>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</div>

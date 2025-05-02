@@ -2,31 +2,13 @@
     <head>
         <meta charset="UTF-8">
         <title>Log In</title>
+        <link rel="stylesheet" href="/css/index.css">
     </head>
     <body>
+        <div id="content"></div>
         <% if (locals.user) { %>
             <h1>Hello <%= user.username %></h1>
-            <% if (locals.files) { %>
-                <ul class="files-list">
-                    <% files.forEach(function(file) { %>
-                      <li>
-                        <a href="<%= `/file/${file.id}` %>"><%= file.filename %></a>
-                        <a href="<%= `/file/${file.id}/delete` %>"</a>Delete</a>
-                      </li>
-                    <% }); %>
-                </ul>
-            <% } %>
-            <% if (locals.folders) { %>
-                <ul class="folders-list">
-                    <% folders.forEach(function(folder) { %>
-                      <li>
-                        <a href="/folder/<%= folder.id %>"><%= folder.title %></a>
-                        <a href="/delete/<%= folder.id %>">Delete</a>
-                        <a href="/edit/<%= folder.id %>">Edit</a>
-                      </li>
-                    <% }); %>
-                </ul>
-            <% } %>
+            <%- include("folders/listAll.ejs", {folders: folders, files: files}); %>
             <a href="logout">Log out</a>
         <% } else { %>
             <%- include('auth/login') %>

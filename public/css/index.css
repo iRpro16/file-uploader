@@ -1,0 +1,21 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.folder {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+.file {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+.folder > div:nth-child(2) {
+    display: flex;
+    gap: 10px;
+}
