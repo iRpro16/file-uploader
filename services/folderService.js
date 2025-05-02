@@ -24,8 +24,28 @@ async function deleteFolder(folderId) {
     })
 }
 
+async function showFolder(folderId) {
+    const folder = await prisma.folder.findUnique({
+        where: { id: folderId }
+    })
+    return folder;
+}
+
+async function updateFolder(folderId, newFolderName) {
+    await prisma.folder.update({
+        where: {
+            id: folderId,
+        },
+        data: {
+            title: newFolderName,
+        }
+    })
+}
+
 module.exports = {
     createFolder,
     showFolders,
-    deleteFolder
+    deleteFolder,
+    updateFolder,
+    showFolder
 }

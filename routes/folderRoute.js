@@ -10,5 +10,9 @@ folderRouter.post("/create-folder", folderController.postCreateFolder);
 // GET method to delete folder and its files
 folderRouter.get("/delete/:folderId", folderController.getDeleteFolder);
 
+// GET method to edit folder
+folderRouter.get("/edit/:folderId", folderController.getEditFolder);
+// POST method to edit folder
+folderRouter.post("/edit/:folderId", folderController.postEditFolder);
 
 module.exports = folderRouter;

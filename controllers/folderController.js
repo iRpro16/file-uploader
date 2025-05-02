@@ -2,7 +2,9 @@ const folderService = require("../services/folderService");
 const fileService = require("../services/fileService");
 
 async function getCreateFolder(req, res) {
-    res.render("forms/folder");
+    res.render("forms/folder", {
+        folder: null
+    });
 }
 
 async function postCreateFolder(req, res) {
@@ -33,8 +35,42 @@ async function getDeleteFolder(req, res) {
         res.status(500).send("Failed to delete folder");
     }
 }
+
+async function getEditFolder(req, res) {
+    try {
+        const folderId = Number(req.params.folderId);
+        const folder = await folderService.showFolder(folderId);
+    
+        res.render("forms/folder", {
+            folder: folder
+        })
+    } catch (err) {
+        console.error("Error retrieving folder:", err);
+        res.status(500).send("Failed to retrieve folder");
+    }
+}
+
+async function postEditFolder(req, res) {
+    try {
+        const folderId = Number(req.params.folderId);
+        const newFolderName = req.body.folder_name;
+    
+        await folderService.updateFolder(
+            folderId,
+            newFolderName
+        )
+    
+        res.redirect("/");
+    } catch (err) {
+        console.error("Faile to update folder:", err);
+        res.status(500).send("Failed to update folder");
+    }
+}
+
 module.exports = {
     getCreateFolder,
     postCreateFolder,
-    getDeleteFolder
+    getDeleteFolder,
+    getEditFolder,
+    postEditFolder
 }
