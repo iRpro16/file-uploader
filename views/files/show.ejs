@@ -8,7 +8,7 @@
             <% if (locals.file) { %>
                 <div class="details-cont">
                     <p>Name: <%= file.filename %></p>
-                    <p>Size: <%= file.size %></p>
+                    <p>Size: <%= file.size %> bytes</p>
                     <a href="<%= file.path %>" target="_blank" rel="noopener noreferrer">View file</a>
                     <a href="#" onclick="downloadFromSupabase('<%= file.path %>', '<%= file.filename %>')">Download</a>
                     <script>

@@ -8,11 +8,16 @@ async function getCreateFolder(req, res) {
 }
 
 async function postCreateFolder(req, res) {
-    await folderService.createFolder(
-        req.body.folder_name,
-        req.user.id
-    )
-    res.redirect("/");
+    try {
+        await folderService.createFolder(
+            req.body.folder_name,
+            req.user.id
+        )
+        res.redirect("/");
+    } catch (err) {
+        console.error("Error creating folder:", err);
+        res.status(500).send("Failed to create folder");
+    }
 }
 
 async function getDeleteFolder(req, res) {

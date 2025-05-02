@@ -1,11 +1,17 @@
 const fileService = require("../services/fileService");
 
 async function getShowFile(req, res) {
-    const fileId = Number(req.params.fileId);
-    const file  = await fileService.showFile(fileId);
-    res.render("files/show", { 
-        file: file
-    });
+    try {
+        const fileId = Number(req.params.fileId);
+        const file  = await fileService.showFile(fileId);
+
+        res.render("files/show", { 
+            file: file
+        });
+    } catch (err) {
+        console.error("Error showing file:", err);
+        res.status(500).send("Show file failed");
+    }
 }
 
 async function getUploadFile(req, res) {
@@ -61,14 +67,20 @@ async function postUploadFileInFolder(req, res) {
 }
 
 async function getShowFolderFiles(req, res) {
-    const allFolderFiles = await fileService.showFolderFiles(
-        req.user.id,
-        Number(req.params.folderId)
-    )
-    res.render("files/list", {
-        folderId: req.params.folderId,
-        allFiles: allFolderFiles
-    })
+    try {
+        const allFolderFiles = await fileService.showFolderFiles(
+            req.user.id,
+            Number(req.params.folderId)
+        )
+
+        res.render("files/list", {
+            folderId: req.params.folderId,
+            allFiles: allFolderFiles
+        })
+    } catch (err) {
+        console.error("Error showing files in folder:", err);
+        res.status(500).send("Failed to show files");
+    }
 }
 
 async function getDeleteFile(req, res) {

@@ -5,13 +5,14 @@
         <link rel="stylesheet" href="/css/index.css">
     </head>
     <body>
-        <div id="content"></div>
-        <% if (locals.user) { %>
-            <h1>Hello <%= user.username %></h1>
-            <%- include("folders/listAll.ejs", {folders: folders, files: files}); %>
-            <a href="logout">Log out</a>
-        <% } else { %>
-            <%- include('auth/login') %>
-        <% } %>
+        <div id="content">
+            <% if (locals.user) { %>
+                <h1>Hello <%= user.username %></h1>
+                <%- include("folders/listAll.ejs", {folders: folders, files: files}); %>
+                <a href="logout">Log out</a>
+            <% } else { %>
+                <%- include('auth/login') %>
+            <% } %>
+        </div>
     </body>
 </html>
