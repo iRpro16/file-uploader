@@ -1,4 +1,5 @@
 const fileService = require("../services/fileService");
+const folderService = require("../services/folderService");
 
 async function getUploadFile(req, res) {
     res.render("forms/file", { 
@@ -54,12 +55,17 @@ async function postUploadFileInFolder(req, res) {
 
 async function getShowFolderFiles(req, res) {
     try {
+        const folderId = Number(req.params.folderId);
+
+        const folder = await folderService.showFolder(folderId);
         const allFolderFiles = await fileService.showFolderFiles(
             req.user.id,
-            Number(req.params.folderId)
+            folderId
         )
 
         res.render("files/list", {
+            user: req.user,
+            folderName: folder.title,
             folderId: req.params.folderId,
             allFiles: allFolderFiles
         })

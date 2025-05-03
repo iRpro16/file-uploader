@@ -1,6 +1,6 @@
 body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-color: #FFFFFF;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -44,9 +44,35 @@ body {
     font-weight: bold;
 }
 
+.details > div:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
 .end-detail {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 250px;
+}
+
+.folder-name {
+    font-size: 1.7rem;
+    color: #333;
+    margin-bottom: 1rem;
+    padding: 5px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.add-btn {
+    background-color: #F0F4F8;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.add-btn:hover {
+    background-color: #d7dee4;
 }

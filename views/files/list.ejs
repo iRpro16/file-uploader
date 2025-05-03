@@ -1,19 +1,39 @@
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Folder Files</title>
+        <link rel="stylesheet" href="/css/list.css">
     </head>
     <body>
-        <a href="<%= `/folder/${folderId}/upload-file`%>">Add to folder</a>
-        <% if (locals.allFiles) { %>
-            <ul>
-                <% allFiles.forEach(function(file) { %>
-                  <li><a href="<%= `/file/${file.id}` %>"><%= file.filename %></a></li>
-                <% }); %>
-            </ul>
-        <% } %>
-        <% if (locals.allFiles.length === 0) { %>
-            <h1>No files yet</h1>
-        <% }%>
-        <a href="/">Back to home</a>
+        <div id="content">
+            <%- include("../partials/header", { user: user }) %>
+            <div id="middle">
+                <div class="list-all">
+                    <% if (locals.folderName) { %>
+                        <h2 class="folder-name">Folder > <%= folderName %></h2>
+                    <% } %>
+                    <div class="details">
+                        <div>
+                            <p>Name</p>
+                            <a href="<%= `/folder/${folderId}/upload-file`%>">
+                                <img src="/images/plus.svg" height="20" width="20" class="add-btn">
+                            </a>
+                        </div>
+                        <div class="end-detail">
+                            <p>File size</p>
+                            <img src="/images/dots-vertical.svg" height="20" width="20">
+                        </div>
+                    </div>
+                    <% if (locals.allFiles) { %>
+                        <% allFiles.forEach(file => { %>
+                            <%- include("../partials/file", { file: file }) %>
+                        <% }) %>
+                    <% } %>
+                    <% if (locals.allFiles.length === 0) { %>
+                        <h1>No files yet</h1>
+                    <% }%>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

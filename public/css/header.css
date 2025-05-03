@@ -4,7 +4,8 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #d38b5d;
+    background-color: #F0F4F8;
+    border-bottom: 2px solid #ccc;
     max-width: 100vw;
 }
 
@@ -14,30 +15,14 @@ header > div:nth-child(1) {
     align-items: center;
     gap: 10px;
 }
-  
-.menus {
-    display: flex;
-    gap: 1rem;
+
+header > div >  h3 > a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.3em;
 }
 
-.action {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100px;
-    border-radius: 5px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-.trigger {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
+/* Menu */
 .menu {
     display: none;
     position: absolute;
@@ -81,6 +66,31 @@ header > div:nth-child(1) {
     color: #333;
     font-weight: 500;
 }
+
+.menus {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Functionality */
+.action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.trigger {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
 
 .new-dropdown {
     min-width: 120px;
