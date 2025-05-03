@@ -24,13 +24,22 @@
                             <img src="/images/dots-vertical.svg" height="20" width="20">
                         </div>
                     </div>
+
                     <% if (locals.allFiles) { %>
                         <% allFiles.forEach(file => { %>
                             <%- include("../partials/file", { file: file }) %>
                         <% }) %>
                     <% } %>
+                    
                     <% if (locals.allFiles.length === 0) { %>
-                        <h1>No files yet</h1>
+                        <div class="no-files">
+                            <img src="/images/file-hidden.svg" alt="No files" class="no-files-icon" height="40" width="40">
+                            <h1 class="no-file-header">No files yet</h1>
+                            <p class="no-file-text">Start by uploading a file.</p>
+                            <div class="no-file-actions">
+                                <a href="<%= `/folder/${folderId}/upload-file`%>" class="action-btn">Upload File</a>
+                            </div>
+                        </div>
                     <% }%>
                 </div>
             </div>

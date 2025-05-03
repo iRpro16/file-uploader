@@ -50,3 +50,49 @@ body {
     align-items: center;
     width: 250px;
 }
+
+/* No files */
+.no-files {
+    text-align: center;
+    margin-top: 80px;
+    font-family: sans-serif;
+    color: #333;
+}
+
+.no-files-icon {
+    width: 80px;
+    height: 80px;
+    opacity: 0.6;
+    margin-bottom: 20px;
+}
+
+.no-file-header {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.no-file-text {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.no-file-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.action-btn {
+    padding: 10px 16px;
+    background-color: #F0F4F8;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #d9e2ec;
+}

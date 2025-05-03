@@ -1,6 +1,8 @@
 <html>
     <head>
-        <title>Upload file</title>
+      <meta charset="UTF-8">
+      <title>Upload file</title>
+      <link rel="stylesheet" href="/css/fileForm.css">
     </head>
     <body>
         <form action="<%= folderId ? `/folder/${folderId}/upload-file` : '/upload-file' %>" enctype="multipart/form-data" method="post">
@@ -8,6 +10,7 @@
               <input type="file" class="form-control-file" name="uploaded_file">
               <button type="submit">Submit</button>
             </div>
+            <a href="/">Back</a>
           </form>
     </body>
 </html>
