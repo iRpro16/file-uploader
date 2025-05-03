@@ -11,90 +11,16 @@
     <div class="folders">
         <% if (locals.folders) { %>
             <% folders.forEach(folder => { %>
-                <div class="folder">
-                    <div>
-                        <img src="/images/folder.svg" alt="folder icon" width="20" height="20">
-                        <a href="/folder/<%= folder.id %>"><%= folder.title %></a>
-                    </div>
-                    <div class="end-folder">
-                        <p>—</p>
-                        <div class="menu-cont">
-                            <img src="/images/dots-vertical.svg" height="20" width="20" onclick="toggleMenu(this)">
-
-                            <div class="links">
-                                <a href="/edit/<%= folder.id %>">
-                                    <img src="/images/folder-edit.svg" alt="folder edit" width="20" height="20">
-                                    <p>Edit</p>
-                                </a>
-                                <a href="/delete/<%= folder.id %>">
-                                    <img src="/images/delete.svg" alt="delete icon" width="20" height="20">
-                                    <p>Delete</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <%- include("../partials/folder", { folder: folder }) %>
             <% }) %>
         <% } %>
     </div>
+    
     <div class="files">
         <% if (locals.files) { %>
             <% files.forEach(file => { %>
-                <div class="file">
-                    <div>
-                        <img src="/images/file.svg" alt="file icon" width="20" height="20">
-                        <a href="<%= file.path %>" target="_blank" rel="noopener noreferrer"><%= file.filename %></a>
-                    </div>
-                    <div class="end-file">
-                        <p><%= file.size %> bytes</p>
-                        <div class="menu-cont">
-                            <img src="/images/dots-vertical.svg" height="20" width="20" onclick="toggleMenu(this)">
-
-                            <div class="links">
-                                <a href="#" onclick="downloadFromSupabase('<%= file.path %>', '<%= file.filename %>')">
-                                    <img src="/images/download.svg" alt="eye" width="20" height="20">
-                                    <p>Download</p>
-                                </a>
-                                <a href="<%= `/file/${file.id}/delete` %>">
-                                    <img src="/images/delete.svg" alt="delete icon" width="20" height="20">
-                                    <p>Delete</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <%- include("../partials/file", { file: file }) %>
             <% }) %>
         <% } %>
     </div>
-    <script>
-        function toggleMenu(icon) {
-            const allMenus = document.querySelectorAll('.links');
-            const currentMenu = icon.nextElementSibling;
-        
-            allMenus.forEach(menu => {
-            if (menu !== currentMenu) menu.classList.remove('active');
-            });
-        
-            currentMenu.classList.toggle('active');
-        }
-      
-        document.addEventListener('click', e => {
-            if (!e.target.closest('.menu-cont')) {
-            document.querySelectorAll('.links').forEach(menu => menu.classList.remove('active'));
-            }
-        });
-
-        async function downloadFromSupabase(url, filename) {
-            const response = await fetch(url);
-            const blob = await response.blob();
-            const blobUrl = URL.createObjectURL(blob);
-
-            const a = document.createElement('a');
-            a.href = blobUrl;
-            a.download = filename;
-            a.click();
-
-            URL.revokeObjectURL(blobUrl);
-        }
-      </script>
 </div>

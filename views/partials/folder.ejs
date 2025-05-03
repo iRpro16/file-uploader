@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/css/folder.css">
+    </head>
+    <body>
+        <div class="folder">
+            <div>
+                <img src="/images/folder.svg" alt="folder icon" width="20" height="20">
+                <a href="/folder/<%= folder.id %>"><%= folder.title %></a>
+            </div>
+            <div class="end-folder">
+                <p>—</p>
+                <div class="menu-cont">
+                    <img src="/images/dots-vertical.svg" height="20" width="20" onclick="toggleMenu(this)">
+        
+                    <div class="links">
+                        <a href="/edit/<%= folder.id %>">
+                            <img src="/images/folder-edit.svg" alt="folder edit" width="20" height="20">
+                            <p>Edit</p>
+                        </a>
+                        <a href="/delete/<%= folder.id %>">
+                            <img src="/images/delete.svg" alt="delete icon" width="20" height="20">
+                            <p>Delete</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function toggleMenu(icon) {
+                    const allMenus = document.querySelectorAll('.links');
+                    const currentMenu = icon.nextElementSibling;
+                
+                    allMenus.forEach(menu => {
+                        if (menu !== currentMenu) menu.classList.remove('active');
+                    });
+                
+                    currentMenu.classList.toggle('active');
+                }
+              
+                document.addEventListener('click', e => {
+                    if (!e.target.closest('.menu-cont')) {
+                    document.querySelectorAll('.links').forEach(menu => menu.classList.remove('active'));
+                    }
+                });
+            </script>
+        </div>
+    </body>
+</html>
+

@@ -1,0 +1,77 @@
+/* file */
+.file {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.file:hover {
+    background-color: #f3f3f3;
+}
+
+.file a {
+    text-decoration: none;
+    color: black;
+}
+
+.file a:hover {
+    text-decoration: underline;
+}
+
+.file > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.end-file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+}
+
+/* File links */
+.links {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+}
+
+.links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.links.active {
+    display: flex;
+}
+
+.links a:first-child {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Menu container */
+.menu-cont {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-cont img {
+    cursor: pointer;
+}

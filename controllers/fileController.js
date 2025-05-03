@@ -91,6 +91,5 @@ module.exports = {
     getShowFolderFiles,
     postUploadFileInFolder,
     getUploadFileInFolder,
-    getShowFile,
     getDeleteFile
 }
