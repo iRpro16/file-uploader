@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F0F4F8;
+    min-height: 100vh;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.form-cont {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+h1 {
+    color: #2d3748;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    color: #4a5568;
+    background-color: #f9fafc;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4a7fb5;
+    box-shadow: 0 0 0 3px rgba(74, 127, 181, 0.15);
+    background-color: white;
+}
+
+input::placeholder {
+    color: #a0aec0;
+}
+
+button {
+    background-color: #4a7fb5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #3a6a98;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 480px) {
+    .form-cont {
+        padding: 30px 20px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+    
+    input, button {
+        padding: 12px 14px;
+    }
+}
+
+/* Add a subtle animation on input focus */
+@keyframes subtle-pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.01); }
+    100% { transform: scale(1); }
+}
+
+input:focus {
+    animation: subtle-pop 0.3s ease-out;
+}

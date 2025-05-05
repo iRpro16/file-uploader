@@ -1,33 +1,39 @@
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" content="width=device-width, initial-scale=1.0">
         <title>Sign up</title>
+        <link rel="stylesheet" href="/css/signupForm.css">
     </head>
     <body>
-        <h1>Sign Up</h1>
-        <%- include("../partials/errors") %>
-        <form action="signup" method="post">
-            <div>
-                <label for="fullname">Full Name:</label>
-                <input name="fullname" id="fullname" type="text">
+        <div class="signup-container">
+            <h1>Sign Up</h1>
+            <%- include("../partials/errors") %>
+            <form action="signup" method="post">
+                <div>
+                    <label for="fullname">Full Name:</label>
+                    <input name="fullname" id="fullname" type="text">
+                </div>
+                <div>
+                    <label for="username">Username:</label>
+                    <input name="username" id="username" type="text">
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input name="email" id="email" type="email">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input name="password" id="password" type="password">
+                </div>
+                <div>
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input name="confirm-password" id="confirm-password" type="password">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+            <div class="login-link">
+                Already have an account? <a href="/login">Log in</a>
             </div>
-            <div>
-                <label for="username">Username:</label>
-                <input name="username" id="username" type="text">
-            </div>
-            <div>
-                <label for="email">Email:</label>
-                <input name="email" id="email" type="email">
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input name="password" id="password" type="password">
-            </div>
-            <div>
-                <label for="confirm-password">Confirm Password:</label>
-                <input name="confirm-password" id="confirm-password" type="password">
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+        </div>
     </body>
 </html>
