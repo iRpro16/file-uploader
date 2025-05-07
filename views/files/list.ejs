@@ -18,6 +18,7 @@
                             <a href="<%= `/folder/${folderId}/upload-file`%>">
                                 <img src="/images/plus.svg" height="20" width="20" class="add-btn">
                             </a>
+                            <a href="<%= `/folder/create/${folderId}` %>">Add folder</a>
                         </div>
                         <div class="end-detail">
                             <p>File size</p>
@@ -25,21 +26,20 @@
                         </div>
                     </div>
 
+                    <% if (locals.allChildrenFolders) { %>
+                        <% allChildrenFolders.forEach(folder => { %>
+                            <%- include("../partials/folder", { folder: folder }) %>
+                        <% }) %>
+                    <% } %>
+
                     <% if (locals.allFiles) { %>
                         <% allFiles.forEach(file => { %>
                             <%- include("../partials/file", { file: file }) %>
                         <% }) %>
                     <% } %>
                     
-                    <% if (locals.allFiles.length === 0) { %>
-                        <div class="no-files">
-                            <img src="/images/file-hidden.svg" alt="No files" class="no-files-icon" height="40" width="40">
-                            <h1 class="no-file-header">No files yet</h1>
-                            <p class="no-file-text">Start by uploading a file.</p>
-                            <div class="no-file-actions">
-                                <a href="<%= `/folder/${folderId}/upload-file`%>" class="action-btn">Upload File</a>
-                            </div>
-                        </div>
+                    <% if (locals.allFiles.length === 0 && locals.allChildrenFolders.length === 0) { %>
+                        <%- include('../partials/empty') %>
                     <% }%>
                 </div>
             </div>

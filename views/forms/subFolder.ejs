@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Create Folder</title>
+        <link rel="stylesheet" href="/css/folderForm.css">
+    </head>
+    <body>
+        <form action="<%= `/folder/create/${folderId}` %>" method="post">
+            <div class="folder">
+                <label for="folder_name">Folder Name:</label>
+                <input 
+                    type="text" 
+                    name="folder_name" 
+                    id="folder_name"
+                >
+            </div>
+            <button type="submit">Submit</button>
+            <a href="/">Back</a>
+          </form>
+    </body>
+</html>

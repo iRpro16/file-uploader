@@ -9,9 +9,11 @@ async function getCreateFolder(req, res) {
 
 async function postCreateFolder(req, res) {
     try {
+        const { folder_name } = req.body;
+
         await folderService.createFolder(
-            req.body.folder_name,
-            req.user.id
+            folder_name,
+            req.user.id,
         )
         res.redirect("/");
     } catch (err) {
@@ -22,7 +24,7 @@ async function postCreateFolder(req, res) {
 
 async function getDeleteFolder(req, res) {
     try {
-        const folderId = Number(req.params.folderId);
+        const folderId = req.params.folderId
         const deletedFiles = await fileService.showFolderFiles(req.user.id, folderId);
     
         // delete from prisma schemas
@@ -43,7 +45,7 @@ async function getDeleteFolder(req, res) {
 
 async function getEditFolder(req, res) {
     try {
-        const folderId = Number(req.params.folderId);
+        const folderId = req.params.folderId
         const folder = await folderService.showFolder(folderId);
     
         res.render("forms/folder", {
@@ -57,7 +59,7 @@ async function getEditFolder(req, res) {
 
 async function postEditFolder(req, res) {
     try {
-        const folderId = Number(req.params.folderId);
+        const folderId = req.params.folderId;
         const newFolderName = req.body.folder_name;
     
         await folderService.updateFolder(
@@ -72,10 +74,59 @@ async function postEditFolder(req, res) {
     }
 }
 
+async function getNestedFolder(req, res) {
+    const folderId = req.params.folderId;
+    res.render("forms/subFolder", { folderId });
+}
+
+async function postNestedFolder(req, res) {
+    try {
+        const { folder_name } = req.body;
+        const parentId = req.params.folderId;
+
+        await folderService.createFolder(
+            folder_name,
+            req.user.id,
+            parentId
+        )
+        res.redirect("/");
+    } catch (err) {
+        console.error("Error creating folder:", err);
+        res.status(500).send("Failed to create folder");
+    }
+}
+
+async function getShowAllInFolder(req, res) {
+    try {
+        const allFolders = await folderService.showChildrenInFolder(req.params.folderId);
+        const folderId = req.params.folderId;
+        const folder = await folderService.showFolder(folderId);
+        const allFolderFiles = await fileService.showFolderFiles(
+            req.user.id,
+            folderId
+        )
+
+        res.render("files/list", {
+            user: req.user,
+            folderName: folder.title,
+            folderId: req.params.folderId,
+            allFiles: allFolderFiles,
+            allChildrenFolders: allFolders.children
+        })
+
+    } catch (err) {
+        console.error("Error loading children folders: ", err);
+        res.status(500).send("Failed to load children folders");
+    }
+}
+
 module.exports = {
     getCreateFolder,
     postCreateFolder,
     getDeleteFolder,
     getEditFolder,
-    postEditFolder
+    postEditFolder,
+    getNestedFolder,
+    postNestedFolder,
+    getShowAllInFolder
 }

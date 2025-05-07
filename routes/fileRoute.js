@@ -21,8 +21,5 @@ fileRouter.post("/folder/:folderId/upload-file",
 // GET method for delete file
 fileRouter.get("/file/:fileId/delete", fileController.getDeleteFile);
 
-// GET method to show all files in folder
-fileRouter.get("/folder/:folderId", fileController.getShowFolderFiles);
-
 
 module.exports = fileRouter;

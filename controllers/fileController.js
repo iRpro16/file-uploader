@@ -34,7 +34,7 @@ async function getUploadFileInFolder(req, res) {
 async function postUploadFileInFolder(req, res) {
     try {
         const file = req.file;
-        const folderId = Number(req.params.folderId);
+        const folderId = req.params.folderId;
         const publicUrl = await fileService.uploadToSupabase(file);
 
         await fileService.createFile(
@@ -53,31 +53,9 @@ async function postUploadFileInFolder(req, res) {
     
 }
 
-async function getShowFolderFiles(req, res) {
-    try {
-        const folderId = Number(req.params.folderId);
-
-        const folder = await folderService.showFolder(folderId);
-        const allFolderFiles = await fileService.showFolderFiles(
-            req.user.id,
-            folderId
-        )
-
-        res.render("files/list", {
-            user: req.user,
-            folderName: folder.title,
-            folderId: req.params.folderId,
-            allFiles: allFolderFiles
-        })
-    } catch (err) {
-        console.error("Error showing files in folder:", err);
-        res.status(500).send("Failed to show files");
-    }
-}
-
 async function getDeleteFile(req, res) {
     try {
-        const fileId = Number(req.params.fileId);
+        const fileId = req.params.fileId
         const file = await fileService.showFile(fileId);
 
         // delete from prisma and supabase
@@ -94,7 +72,6 @@ async function getDeleteFile(req, res) {
 module.exports = {
     getUploadFile,
     postUploadFile,
-    getShowFolderFiles,
     postUploadFileInFolder,
     getUploadFileInFolder,
     getDeleteFile
