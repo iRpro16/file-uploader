@@ -3,8 +3,9 @@ const folderService = require("../services/folderService");
 
 async function getRenderIndex(req, res) {
     try {
-        const allFolders = req.user ? await folderService.showFolders() : [];
-        const allFiles = req.user ? await fileService.showFiles(req.user.id) : [];
+        const user = req.user;
+        const allFolders = req.user ? await folderService.showFolders(user.id) : [];
+        const allFiles = req.user ? await fileService.showFiles(user.id) : [];
 
         res.render("index", {
             user: req.user,

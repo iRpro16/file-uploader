@@ -10,7 +10,7 @@
               <input type="file" class="form-control-file" name="uploaded_file">
               <button type="submit">Submit</button>
             </div>
-            <a href="/">Back</a>
+            <a href="<%= folderId ? `/folder/${folderId}` : `/` %>">Back</a>
           </form>
     </body>
 </html>

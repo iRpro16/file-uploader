@@ -1,5 +1,6 @@
 const folderService = require("../services/folderService");
 const fileService = require("../services/fileService");
+const folderPath = require("../helpers/folderPath");
 
 async function getCreateFolder(req, res) {
     res.render("forms/folder", {
@@ -33,7 +34,7 @@ async function getDeleteFolder(req, res) {
 
         if (deletedFiles.length > 0) {
             // delete from supabase
-            await fileService.deleteFromSupabase(deletedFiles);
+            await fileService.deleteFilesFromSupabase(deletedFiles);
         }
 
         res.redirect("/");
@@ -98,18 +99,19 @@ async function postNestedFolder(req, res) {
 
 async function getShowAllInFolder(req, res) {
     try {
-        const allFolders = await folderService.showChildrenInFolder(req.params.folderId);
-        const folderId = req.params.folderId;
-        const folder = await folderService.showFolder(folderId);
+        const user = req.user;
+        const folder = req.params.folderId ? await folderService.showFolder(req.params.folderId) : null;
+        const allFolders = await folderService.showChildrenInFolder(folder.id);
+        const path = await folderPath(folder, folderService.showFolder);
         const allFolderFiles = await fileService.showFolderFiles(
-            req.user.id,
-            folderId
+            user.id,
+            folder.id
         )
 
         res.render("files/list", {
-            user: req.user,
-            folderName: folder.title,
-            folderId: req.params.folderId,
+            user: user,
+            folder: folder,
+            folderPath: path,
             allFiles: allFolderFiles,
             allChildrenFolders: allFolders.children
         })

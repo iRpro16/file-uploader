@@ -16,7 +16,8 @@ async function createFile(filename, path, size, userId, folderId = null) {
 async function showFiles(userId) {
     const allFiles = await prisma.file.findMany({
         where: {
-            userId: userId
+            userId: userId,
+            folderId: null
         }
     })
     return allFiles;
@@ -65,7 +66,7 @@ async function deleteFilesFromFolder(folderId) {
     })
 }
 
-async function deleteFromSupabase(deletedFiles) {
+async function deleteFilesFromSupabase(deletedFiles) {
     const fileURLs = deletedFiles.map(file => file.filename);
     const { data, error } = await supabase.storage
         .from('images')
@@ -74,7 +75,7 @@ async function deleteFromSupabase(deletedFiles) {
 
 async function deleteFileFromSupabase(fileArray) {
     const fileURLs = fileArray.map(file => file.filename);
-    const { data, erro } = await supabase.storage
+    const { data, error } = await supabase.storage
         .from('images')
         .remove(fileURLs);
 }
@@ -92,7 +93,7 @@ module.exports = {
     showFile,
     uploadToSupabase,
     deleteFilesFromFolder,
-    deleteFromSupabase,
+    deleteFilesFromSupabase,
     deleteFileFromSupabase,
     deleteFile
 }

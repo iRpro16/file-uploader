@@ -9,16 +9,22 @@
             <%- include("../partials/header", { user: user }) %>
             <div id="middle">
                 <div class="list-all">
-                    <% if (locals.folderName) { %>
-                        <h2 class="folder-name">Folder > <%= folderName %></h2>
+                    <% if (locals.folder) { %>
+                        <h2 class="folder-name">
+                            <% folderPath.forEach((folderName, index) => { %>
+                              <%= folderName %><% if (index < folderPath.length - 1) { %> &gt; <% } %>
+                            <% }) %>
+                          </h2>                          
                     <% } %>
                     <div class="details">
                         <div>
                             <p>Name</p>
-                            <a href="<%= `/folder/${folderId}/upload-file`%>">
-                                <img src="/images/plus.svg" height="20" width="20" class="add-btn">
+                            <a href="<%= `/folder/${folder.id}/upload-file`%>">
+                                <img src="/images/file-document-plus-outline.svg" height="25" width="25" class="add-file-btn">
                             </a>
-                            <a href="<%= `/folder/create/${folderId}` %>">Add folder</a>
+                            <a href="<%= `/folder/create/${folder.id}` %>">
+                                <img src="/images/folder-plus-outline.svg" height="25" width="25" class="add-folder-btn">
+                            </a>
                         </div>
                         <div class="end-detail">
                             <p>File size</p>
@@ -39,7 +45,7 @@
                     <% } %>
                     
                     <% if (locals.allFiles.length === 0 && locals.allChildrenFolders.length === 0) { %>
-                        <%- include('../partials/empty') %>
+                        <%- include('../partials/empty', { folder: folder }) %>
                     <% }%>
                 </div>
             </div>

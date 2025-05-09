@@ -10,9 +10,12 @@ async function createFolder(title, userId, parentId = null) {
     })
 }
 
-async function showFolders() {
+async function showFolders(userId) {
     const allFolders = await prisma.folder.findMany({
-        where: { parentId: null }
+        where: { 
+            userId: userId,
+            parentId: null 
+        }
     })
     return allFolders;
 }
